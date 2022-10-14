@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Home() {
   return (
-    <div>
-      <p>Welcome to chat box..</p>
+    <div className="h-screen flex mt-[200px] justify-center">
+      <p className="text-[50px]">Welcome to web-chat </p>
     </div>
   );
 }
