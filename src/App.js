@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Message from "./pages/Message";
+import Dashboard from "./pages/Dashboard";
 import Errorpage from "./pages/Error";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/message" element={<Message />} />
+        <Route path="/message" element={<Dashboard />} />
         <Route path="*" element={<Errorpage />} />
       </Routes>
     </Router>
