@@ -94,11 +94,19 @@ export default function RegisterForm() {
               htmlFor="file"
               className="text-black items-center flex space-x-3 cursor-pointer"
             >
-              <img
-                src="/share-icon.svg"
-                alt=""
-                className="p-4 rounded-full  bg-cyan-700"
-              />
+              {file ? (
+                <img
+                  src={file}
+                  alt=""
+                  className="p-4 rounded-full  bg-cyan-700"
+                />
+              ) : (
+                <img
+                  src="/share-icon.svg"
+                  alt=""
+                  className="p-4 rounded-full  bg-cyan-700"
+                />
+              )}
               <span>Add an Avatar</span>
             </label>
             <input

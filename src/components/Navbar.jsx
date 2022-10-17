@@ -4,7 +4,7 @@ export default function Navbar() {
   return (
     <div className="navbar fixed justify-between bg-primary text-primary-content">
       <Link to={`/`}>
-        <span className="text-xl font-bold cursor-pointer ">LaemmyChat</span>
+        <span className="text-xl font-bold cursor-pointer ">YofoChat</span>
       </Link>
 
       <ul className="flex space-x-5">

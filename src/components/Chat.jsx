@@ -21,8 +21,8 @@ export default function Chat() {
   return (
     <div className="h-full">
       <ChatNav />
-      <div className="max-h-full overflow-auto h-[80.7%]">
-        {messages.map((m) => (
+      <div className="max-h-full overflow-auto h-[82%]">
+        {messages?.map((m) => (
           <Message message={m} key={m.id} />
         ))}
       </div>

@@ -30,25 +30,27 @@ export default function Chats() {
 
   return (
     <div>
-      {Object.entries(chats)?.map((chat) => (
-        <div
-          onClick={() => handleSelects(chat[1].userInfo)}
-          key={chat[0]}
-          className="pl-2 py-2 flex space-x-2 items-center cursor-pointer hover:bg-slate-400"
-        >
-          <img
-            src={chat[1].userInfo.photoURL}
-            alt=""
-            className="h-6 w-6 rounded-full "
-          />
-          <div>
-            <h1 className="text-white">{chat[1].userInfo.displayName}</h1>
-            <p className="text-[#ccc] text-xs font-light">
-              {chat[1].userInfo.lastMessage?.text}
-            </p>
+      {Object.entries(chats)
+        ?.sort((a, b) => b[1].date - a[1].date)
+        .map((chat) => (
+          <div
+            onClick={() => handleSelects(chat[1].userInfo)}
+            key={chat[0]}
+            className="pl-2 py-2 flex space-x-2 items-center cursor-pointer hover:bg-slate-400"
+          >
+            <img
+              src={chat[1].userInfo.photoURL}
+              alt=""
+              className="h-6 w-6 rounded-full "
+            />
+            <div>
+              <h1 className="text-white">{chat[1].userInfo.displayName}</h1>
+              <p className="text-[#ccc] text-xs font-light">
+                {chat[1].lastMessage?.text}
+              </p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 }
