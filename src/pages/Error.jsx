@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Error() {
   return (
-    <div className="flex justify-center bg-white pt-20 ">
+    <div className="flex justify-center items-center h-screen  bg-white ">
       <div>
         <p className="font-bold text-lg">Oops!!</p>
         <p className="text-[70px] font-black text-indigo-400"> Error 404 </p>
