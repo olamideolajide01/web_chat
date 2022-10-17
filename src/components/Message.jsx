@@ -17,8 +17,8 @@ export default function Message({ message }) {
         ref={ref}
         className={` ${
           message.senderId === curUser.uid
-            ? "flex gap-4"
-            : "flex gap-4 flex-row-reverse"
+            ? "flex gap-4 flex-row-reverse"
+            : "flex gap-4 "
         }`}
       >
         <div>
@@ -40,8 +40,8 @@ export default function Message({ message }) {
           <p
             className={`${
               message.senderId === curUser.uid
-                ? "bg-gray-400 text-sm px-3 py-2  rounded-r-lg rounded-bl-lg"
-                : "bg-blue-200 text-sm px-3 py-2  rounded-l-lg rounded-br-lg"
+                ? "bg-blue-200 text-sm px-3 py-2  rounded-l-lg rounded-br-lg"
+                : "bg-gray-400 text-sm px-3 py-2  rounded-r-lg rounded-bl-lg"
             }`}
           >
             {message.text}
