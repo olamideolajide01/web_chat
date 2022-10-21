@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { auth, storage, db } from "../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -6,13 +6,29 @@ import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
+  const imgUploadFile = useRef(null);
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [file, setFile] = useState("");
   const [err, setErr] = useState(false);
+  const [imgUploadError, setImgUploadError] = useState(null);
 
   const navigate = useNavigate();
+
+  const handleFileChange = () => {
+    setFile(null);
+    setImgUploadError(null);
+    const file2 = imgUploadFile.current.files[0];
+    if (file2) {
+      if (file2.size / 1024 > 500) {
+        setImgUploadError("This image is too larger than 500kb");
+      } else {
+        setFile(file);
+        setImgUploadError(null);
+      }
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -101,21 +117,22 @@ export default function RegisterForm() {
                   className="p-4 rounded-full  bg-cyan-700"
                 />
               ) : (
-                <img
-                  src="/share-icon.svg"
-                  alt=""
-                  className="p-4 rounded-full  bg-cyan-700"
-                />
+                <img src="" alt="" className="p-4 rounded-full  bg-cyan-700" />
               )}
               <span>Add an Avatar</span>
             </label>
             <input
+              accept="image/*"
+              ref={imgUploadFile}
               hidden
               type="file"
               id="file"
-              onChange={(e) => setFile(e.target.files[0])}
+              onChange={handleFileChange}
             />
           </div>
+          {imgUploadError && (
+            <p className="italic text-xs text-red-600 pt-1">{imgUploadError}</p>
+          )}
         </div>
 
         <div>

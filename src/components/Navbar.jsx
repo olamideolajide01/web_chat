@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+
 export default function Navbar() {
+  const { curUser } = useContext(AuthContext);
   return (
     <div className="navbar fixed justify-between bg-primary text-primary-content">
       <Link to={`/`}>
@@ -11,15 +14,21 @@ export default function Navbar() {
         <li>
           <Link to={`/`}>Home</Link>
         </li>
-        <li>
-          <Link to={`/register`}>Register</Link>
-        </li>
-        <li>
-          <Link to={`/login`}>Login</Link>
-        </li>
-        <li>
-          <Link to={`/dashboard`}>Dashboard</Link>
-        </li>
+        {!curUser && (
+          <>
+            <li>
+              <Link to={`/register`}>Register</Link>
+            </li>
+            <li>
+              <Link to={`/login`}>Login</Link>
+            </li>
+          </>
+        )}
+        {curUser && (
+          <li>
+            <Link to={`/dashboard`}>Dashboard</Link>
+          </li>
+        )}
       </ul>
     </div>
   );

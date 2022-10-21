@@ -11,7 +11,6 @@ export default function AuthContextProvider({ children }) {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       setCurUser(user);
-      console.log("CONTEXT", user);
     });
     return () => {
       unsub();
