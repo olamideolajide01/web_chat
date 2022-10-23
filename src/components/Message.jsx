@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 
 export default function Message({ message }) {
+  console.log("MESSAGE", message.date.nt);
   const { curUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
@@ -33,7 +34,9 @@ export default function Message({ message }) {
             alt=""
             className="rounded-full"
           />
-          <span className="text-xs ">Just Now</span>
+          <span className="text-xs ">
+            {message.senderId === curUser.uid ? curUser.date : data.user.date}
+          </span>
         </div>
 
         <div className="flex max-w-[80%] flex-col gap-2">

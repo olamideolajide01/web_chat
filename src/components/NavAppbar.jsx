@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
+import LoadingSpinner from "../partials/LoadingSpinner";
 
 export default function NavAppbar() {
   const { curUser } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div>
@@ -19,7 +21,7 @@ export default function NavAppbar() {
             onClick={() => signOut(auth)}
             className=" rounded text-white bg-slate-500 text-xs px-2 py-1"
           >
-            Logout
+            {loading ? <LoadingSpinner /> : <span> Logout</span>}
           </button>
         </div>
       </div>

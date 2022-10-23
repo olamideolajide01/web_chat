@@ -19,13 +19,22 @@ export default function Chat() {
     };
   }, [data.chatId]);
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col justify-between">
       <ChatNav />
-      <div className="max-h-full overflow-auto h-[82%]">
-        {messages?.map((m) => (
-          <Message message={m} key={m.id} />
-        ))}
-      </div>
+      {messages.length ? (
+        <div className="max-h-full overflow-auto h-[82%]">
+          <div>
+            {messages?.map((m) => (
+              <Message message={m} key={m.id} />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="flex items-center justify-center text-xl text-[#333]">
+          Choose a chat to start a conversation..
+        </div>
+      )}
+
       <div className="rounded-b ">
         <MessageInput />
       </div>

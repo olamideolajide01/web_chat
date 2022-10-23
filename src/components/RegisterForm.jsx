@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../partials/LoadingSpinner";
 
 export default function RegisterForm() {
   const imgUploadFile = useRef(null);
@@ -12,6 +13,7 @@ export default function RegisterForm() {
   const [password, setPassword] = useState("");
   const [file, setFile] = useState("");
   const [err, setErr] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [imgUploadError, setImgUploadError] = useState(null);
 
   const navigate = useNavigate();
@@ -32,6 +34,7 @@ export default function RegisterForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -56,11 +59,13 @@ export default function RegisterForm() {
               photoURL: downloadURL,
             });
             await setDoc(doc(db, "userChats", res.user.uid), {});
+            setLoading(false);
             navigate("/dashboard");
           });
         }
       );
     } catch (err) {
+      setLoading(false);
       setErr(true);
     }
   };
@@ -140,8 +145,7 @@ export default function RegisterForm() {
             type="submit"
             className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3"></span>
-            Sign Up
+            {loading ? <LoadingSpinner /> : <span> Sign Up</span>}
           </button>
         </div>
         {err && (

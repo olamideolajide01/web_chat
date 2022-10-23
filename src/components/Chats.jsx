@@ -26,8 +26,6 @@ export default function Chats() {
     dispatch({ type: "CHANGE_USER", payload: u });
   };
 
-  console.log(Object.entries(chats));
-
   return (
     <div>
       {Object.entries(chats)
